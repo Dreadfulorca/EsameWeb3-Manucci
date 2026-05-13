@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="page-header">
+        <h1>Contact Manager</h1>
+        <p>A simple directory for your connections</p>
+      </header>
+
+      <section class="contact-card" aria-labelledby="contact-form-title">
+        <h2 id="contact-form-title">
+          <span aria-hidden="true">+</span>
+          Add New Contact
+        </h2>
+
+        <form id="contact-form" autocomplete="off">
+          <div class="form-grid">
+            <label class="field field-full">
+              <span>Full Name</span>
+              <input
+                id="name"
+                name="name"
+                placeholder="Leanne Graham"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>Username</span>
+              <input name="username" placeholder="Bret" required />
+            </label>
+
+            <label class="field">
+              <span>Email</span>
+              <input
+                name="email"
+                type="email"
+                placeholder="Sincere@april.biz"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>Phone</span>
+              <input name="phone" placeholder="1-770-736-8031" required />
+            </label>
+
+            <label class="field">
+              <span>Website</span>
+              <input name="website" placeholder="hildegard.org" required />
+            </label>
+          </div>
+
+          <div class="divider" aria-hidden="true"></div>
+
+          <div class="form-grid">
+            <label class="field field-full">
+              <span>Company Name</span>
+              <input
+                name="companyName"
+                placeholder="Romaguera-Crona"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>Catchphrase</span>
+              <input
+                name="catchPhrase"
+                placeholder="Multi-layered client-server"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>BS</span>
+              <input
+                name="bs"
+                placeholder="harness real-time markets"
+                required
+              />
+            </label>
+          </div>
+
+          <button class="save-button" type="submit">Save Contact</button>
+        </form>
+      </section>
+
+      <section class="directory-section" aria-labelledby="directory-title">
+        <h2 id="directory-title">
+          <span aria-hidden="true">::</span>
+          Directory
+        </h2>
+        <ul id="contact-list" aria-live="polite"></ul>
+      </section>
+
+      <footer>Curator Contacts &copy; 2023</footer>
+    </main>
+
+    <script src="main.ts" type="module"></script>
+  </body>
+</html>
