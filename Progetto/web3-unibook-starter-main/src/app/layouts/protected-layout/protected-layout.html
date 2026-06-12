@@ -1,0 +1,74 @@
+<div class="app-shell">
+  <mat-toolbar class="app-header" [class.app-header--phone-menu-open]="phoneMenuOpen()">
+    <a class="brand" routerLink="/home" aria-label="Vai alla home">
+      <img class="brand-logo" src="/login-logo.png" alt="" aria-hidden="true" />
+      <span>Looply</span>
+    </a>
+
+    <nav class="app-nav" aria-label="Navigazione principale">
+      <a
+        mat-flat-button
+        routerLink="/posts/new"
+        routerLinkActive="create-link--active"
+        class="create-link"
+        aria-label="Pubblica un nuovo post"
+      >
+        +
+      </a>
+
+      <a mat-button routerLink="/home" routerLinkActive="nav-link--active" class="nav-link">
+        Home
+      </a>
+
+      <a mat-button routerLink="/profile" routerLinkActive="nav-link--active" class="nav-link">
+        Profilo
+      </a>
+
+      <a mat-button routerLink="/users/search" routerLinkActive="nav-link--active" class="nav-link">
+        Cerca
+      </a>
+
+      @if (currentUser(); as user) {
+      <a routerLink="/profile" class="user-chip" aria-label="Vai al tuo profilo">
+        {{ user.firstName }} {{ user.lastName }}
+      </a>
+      }
+
+      <button mat-flat-button type="button" class="logout-button" (click)="logout()">
+        Logout
+      </button>
+    </nav>
+
+    <button
+      mat-icon-button
+      type="button"
+      class="phone-menu-trigger"
+      aria-controls="phone-navigation"
+      [attr.aria-label]="phoneMenuOpen() ? 'Chiudi menu di navigazione' : 'Apri menu di navigazione'"
+      [attr.aria-expanded]="phoneMenuOpen()"
+      (click)="togglePhoneMenu()"
+    >
+      <mat-icon aria-hidden="true">{{ phoneMenuOpen() ? 'close' : 'menu' }}</mat-icon>
+    </button>
+
+    @if (phoneMenuOpen()) {
+    <nav id="phone-navigation" class="phone-menu" aria-label="Navigazione mobile">
+      @if (currentUser(); as user) {
+      <a routerLink="/profile" class="phone-menu-user" (click)="closePhoneMenu()">
+        {{ user.firstName }} {{ user.lastName }}
+      </a>
+      }
+
+      <a routerLink="/posts/new" class="phone-menu-link" (click)="closePhoneMenu()">Pubblica</a>
+      <a routerLink="/home" class="phone-menu-link" (click)="closePhoneMenu()">Home</a>
+      <a routerLink="/profile" class="phone-menu-link" (click)="closePhoneMenu()">Profilo</a>
+      <a routerLink="/users/search" class="phone-menu-link" (click)="closePhoneMenu()">Cerca</a>
+      <button type="button" class="phone-menu-logout" (click)="logout()">Logout</button>
+    </nav>
+    }
+  </mat-toolbar>
+
+  <main class="app-main">
+    <router-outlet />
+  </main>
+</div>

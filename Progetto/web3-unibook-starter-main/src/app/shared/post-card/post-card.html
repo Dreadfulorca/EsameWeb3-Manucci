@@ -1,0 +1,56 @@
+<mat-card class="post-card" appearance="outlined">
+  <mat-card-header>
+    <div class="avatar" mat-card-avatar aria-hidden="true">
+      @if (post().author.avatarUrl) {
+      <img [src]="post().author.avatarUrl" alt="" />
+      } @else {
+      <span>{{ post().author.firstName.charAt(0) }}{{ post().author.lastName.charAt(0) }}</span>
+      }
+    </div>
+
+    <mat-card-title>
+      <a class="author-link" [routerLink]="authorProfileLink()">{{ authorName() }}</a>
+    </mat-card-title>
+    <mat-card-subtitle>{{ post().createdAt | date: 'dd/MM/yyyy, HH:mm' }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="post-text">{{ post().text }}</p>
+
+    @if (post().imageUrl) {
+    <img class="post-image" [src]="post().imageUrl" [alt]="'Immagine del post di ' + authorName()" />
+    }
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <span class="likes-count" [attr.aria-label]="post().likesCount + ' like'">
+      {{ post().likesCount }} like
+    </span>
+
+    <button
+      mat-icon-button
+      type="button"
+      class="post-action like-action"
+      (click)="toggleLike()"
+      [disabled]="busy()"
+      [attr.aria-label]="post().isLiked ? 'Togli mi piace' : 'Metti mi piace'"
+      [attr.aria-pressed]="post().isLiked"
+    >
+      <mat-icon class="like-icon" aria-hidden="true">
+        {{ post().isLiked ? 'favorite' : 'favorite_border' }}
+      </mat-icon>
+    </button>
+
+    @if (canRemove()) {
+    <button
+      mat-button
+      type="button"
+      class="post-action danger-action"
+      (click)="removePost()"
+      [disabled]="busy()"
+    >
+      Elimina
+    </button>
+    }
+  </mat-card-actions>
+</mat-card>

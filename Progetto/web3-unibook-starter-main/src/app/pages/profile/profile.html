@@ -1,0 +1,95 @@
+<section class="page-shell" aria-labelledby="profile-heading">
+  @if (currentUser(); as user) {
+  <header class="page-header">
+    @if (user.avatarUrl; as avatarUrl) {
+    <button
+      type="button"
+      class="avatar avatar-button"
+      aria-label="Apri la tua foto profilo"
+      (click)="openAvatar(avatarUrl, user.firstName, user.lastName)"
+    >
+      <img [src]="avatarUrl" alt="" />
+    </button>
+    } @else {
+    <div class="avatar" aria-hidden="true">
+      <span>{{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}</span>
+    </div>
+    }
+
+    <div class="profile-main">
+      <p class="eyebrow">Profilo personale</p>
+      <h1 id="profile-heading">{{ user.firstName }} {{ user.lastName }}</h1>
+    </div>
+
+    <a mat-flat-button routerLink="/profile/edit" class="profile-action">Modifica profilo</a>
+  </header>
+
+  <dl class="profile-grid">
+    <div>
+      <dt>Email</dt>
+      <dd>{{ user.email }}</dd>
+    </div>
+    <div>
+      <dt>Data di nascita</dt>
+      <dd>{{ user.birthDate }}</dd>
+    </div>
+    <div>
+      <dt>Follower</dt>
+      <dd>{{ user.followersCount }}</dd>
+    </div>
+    <div>
+      <dt>Seguiti</dt>
+      <dd>{{ user.followingCount }}</dd>
+    </div>
+    <div class="profile-grid__full">
+      <dt>Bio</dt>
+      <dd>{{ user.bio || 'Nessuna bio inserita.' }}</dd>
+    </div>
+  </dl>
+
+  <section class="posts-section" aria-labelledby="profile-posts-heading">
+    <div class="section-header">
+      <h2 id="profile-posts-heading">I tuoi post</h2>
+      <button type="button" class="button-secondary" (click)="reloadPosts()" [disabled]="loadingPosts()">
+        Aggiorna
+      </button>
+    </div>
+
+    @if (postsError()) {
+    <div class="status-box status-box--error" role="alert">
+      <p>{{ postsError() }}</p>
+    </div>
+    }
+
+    @if (actionError()) {
+    <div class="status-box status-box--error" role="alert">
+      <p>{{ actionError() }}</p>
+    </div>
+    }
+
+    @if (loadingPosts() && !posts().length) {
+    <p class="status-box" role="status">Caricamento post...</p>
+    } @else if (postsEmpty()) {
+    <div class="empty-state" role="status">
+      <div>
+        <h3>Non hai ancora pubblicato post</h3>
+        <p>Condividi un aggiornamento, un pensiero o un'immagine con la tua rete.</p>
+      </div>
+      <a routerLink="/posts/new" class="button-secondary">Pubblica il primo post</a>
+    </div>
+    } @else if (posts().length) {
+    <div class="posts-list">
+      @for (post of posts(); track post.id) {
+      <app-post-card
+        [post]="post"
+        [currentUserId]="user.id"
+        [busy]="actionPostId() === post.id"
+        (likeToggled)="togglePostLike($event)"
+        (postRemoved)="removePost($event)"
+      />
+      }
+    </div>
+    }
+  </section>
+  }
+</section>

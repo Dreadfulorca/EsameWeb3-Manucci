@@ -1,0 +1,49 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.auth-shell {
+  min-height: 100dvh;
+  padding: 1rem 1.25rem 2rem;
+}
+
+.auth-header {
+  width: min(70rem, 100%);
+  margin: 0 auto;
+  padding: 0.75rem 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  color: var(--app-text);
+  text-decoration: none;
+  font-size: 1.55rem;
+  font-weight: 900;
+}
+
+.brand-logo {
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.auth-main {
+  width: min(70rem, 100%);
+  margin: 0 auto;
+  padding: 1rem 0 3rem;
+}
+
+@media (max-width: 720px) {
+  .auth-shell {
+    padding: 0.75rem;
+  }
+
+  .auth-main {
+    padding: 0.5rem 0 2rem;
+  }
+}

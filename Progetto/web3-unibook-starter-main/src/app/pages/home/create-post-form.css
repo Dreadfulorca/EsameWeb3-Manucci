@@ -1,0 +1,91 @@
+.create-post-form {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.text-field,
+.file-field {
+  display: grid;
+  gap: 0.45rem;
+  color: #334155;
+  font-weight: 800;
+}
+
+textarea {
+  width: 100%;
+  min-height: 10rem;
+  resize: vertical;
+  border: 1px solid var(--app-border-strong);
+  border-radius: 1rem;
+  padding: 0.95rem 1rem;
+  background: #ffffff;
+  color: var(--app-text);
+  line-height: 1.55;
+}
+
+textarea:focus {
+  outline: 3px solid rgba(37, 99, 235, 0.2);
+  border-color: var(--app-primary);
+}
+
+.is-invalid {
+  border-color: var(--app-danger);
+}
+
+.counter {
+  justify-self: end;
+  margin: -0.45rem 0 0;
+  color: var(--app-text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+input[type='file'] {
+  width: 100%;
+  color: #334155;
+}
+
+.selected-file {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  color: var(--app-accent);
+  font-weight: 800;
+}
+
+.field-errors {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.inline-error {
+  margin: 0;
+  color: var(--app-danger);
+  font-weight: 800;
+}
+
+.submit-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: start;
+  min-width: 8rem;
+  border-radius: 999px;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  textarea {
+    min-height: 8rem;
+  }
+
+  .selected-file {
+    align-items: flex-start;
+    overflow-wrap: anywhere;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+}

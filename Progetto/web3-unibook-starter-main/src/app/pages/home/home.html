@@ -1,0 +1,56 @@
+<section class="home-page">
+  @if (currentUser(); as user) {
+  <section class="feed-panel" aria-labelledby="feed-heading" [attr.aria-busy]="isFeedLoading()">
+    <div class="panel-header">
+      <h1 id="feed-heading">Feed</h1>
+
+      <button type="button" class="button-secondary" (click)="reloadFeed()" [disabled]="isFeedLoading()">
+        Aggiorna
+      </button>
+    </div>
+
+    @if (isFeedLoading() && feedPosts().length) {
+    <p class="status-inline" role="status">Aggiornamento in corso...</p>
+    }
+
+    @if (feedError()) {
+    <div class="status-box status-box--error" role="alert">
+      <p>{{ feedError() }}</p>
+      <button type="button" class="button-secondary" (click)="reloadFeed()" [disabled]="isFeedLoading()">
+        Riprova
+      </button>
+    </div>
+    }
+
+    @if (actionError()) {
+    <div class="status-box status-box--error" role="alert">
+      <p>{{ actionError() }}</p>
+    </div>
+    }
+
+    @if (isFeedLoading() && !feedPosts().length) {
+    <p class="status-box" role="status">Caricamento feed...</p>
+    } @else if (isFeedEmpty()) {
+    <div class="empty-state" role="status">
+      <div>
+        <h2>Il feed è vuoto</h2>
+        <p>Segui qualcuno o pubblica un post per iniziare a riempire la tua home.</p>
+      </div>
+      <a routerLink="/posts/new" class="button-secondary">Pubblica il primo post</a>
+    </div>
+    } @else if (feedPosts().length) {
+    <div class="feed-list">
+      @for (post of feedPosts(); track post.id) {
+      <app-post-card
+        [post]="post"
+        [currentUserId]="user.id"
+        [busy]="actionPostId() === post.id"
+        (likeToggled)="togglePostLike($event)"
+        (postRemoved)="removePost($event)"
+      />
+      }
+    </div>
+    }
+  </section>
+  }
+</section>
