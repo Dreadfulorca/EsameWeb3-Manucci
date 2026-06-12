@@ -1,5 +1,4 @@
-# EsameWeb3-Manucci
-# Looply — Progetto esame Web 3
+# Looply — Progetto esame Web 3 Manucci
 
 Looply è una web application sviluppata come progetto finale per il corso **Web 3**. L'applicazione implementa un piccolo social network universitario partendo dallo starter Angular fornito dal docente in `Progetto/web3-unibook-starter-main` e completando i requisiti funzionali descritti in `requisiti.md`.
 
