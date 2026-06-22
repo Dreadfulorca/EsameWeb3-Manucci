@@ -234,4 +234,4 @@ Durante lo sviluppo sono stati seguiti i pattern suggeriti dallo starter:
 
 ## Autore
 
-Progetto realizzato da **Manucci** per l'esame di Web 3.
+Progetto realizzato da **Alessandro Manucci Mat 366193** per l'esame di Laboratorio Programmazione Web 3.
